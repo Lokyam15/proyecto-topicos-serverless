@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from routes import registrar_rutas
 
 app = Flask(__name__)
 
@@ -9,13 +10,8 @@ def health():
         'service': 'inventario-service'
     })
 
-@app.route('/productos', methods=['GET'])
-def listar_produtos():
-    productos = [
-        {"id": 1, "nombre": "Laptop", "stock": 10},
-        {"id": 2, "nombre": "Mouse", "stock": 25}
-    ]
-    return jsonify(productos)
+registrar_rutas(app)
+  
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(host = '127.0.0.1' , port=5001, debug=True)
